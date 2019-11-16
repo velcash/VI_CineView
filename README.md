@@ -2,9 +2,10 @@
 
 # How to setup and run
 
+Currently only available for Mac and Linux
+
 * pip install -r requirements.txt
-* pipenv intall -r /requirements.txt
-* /bin/sh /bootstrap.sh
+* /bin/bash prepare_env.sh
 
 # Sujet
 
