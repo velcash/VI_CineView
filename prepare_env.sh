@@ -37,7 +37,7 @@ source env/bin/activate
 
 npm install -g vue
 npm install -g @vue/cli
-npm install chartist-vuejs
+npm install vue-chartjs chart.js --save
 npm install axios@0.18.0 --save
 npm install bootstrap@4.3.1 --save
 npm audit fix
