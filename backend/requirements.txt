@@ -1,3 +1,6 @@
 flask
 marshmallow
 flask-cors
+pytest
+pandas
+SQLAlchemy

@@ -15,6 +15,12 @@ fi
 pip3 install -r requirements.txt
 
 cd backend/
+
+if [ -f "cine_view.db"]; then
+  echo "Please run the command sqlite3 cine_view.db in the backend folder!!!"
+  exit
+fi
+
 if [ -d "venv" ]; then
   echo "The Virtualenv exists"
 else
@@ -40,6 +46,10 @@ npm install -g @vue/cli
 npm install vue-chartjs chart.js --save
 npm install axios@0.18.0 --save
 npm install bootstrap@4.3.1 --save
+npm install vue-slider-component --save
+npm i --save @fortawesome/fontawesome-svg-core
+npm i --save @fortawesome/free-solid-svg-icons
+npm i --save @fortawesome/vue-fontawesome
 npm audit fix
 
 deactivate_node

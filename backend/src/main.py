@@ -2,9 +2,9 @@
 
 from flask import Flask, jsonify
 from flask_cors import CORS
+import pandas as pd
+from pathlib import Path
 
-import os
-print(os.getcwd())
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -18,4 +18,7 @@ def ping_pong():
 
 @app.route('/')
 def rootPage():
-    return jsonify("World")
+    parentPath = Path(__file__).parent.parent.parent
+    myData = pd.read_csv(str(parentPath) + "/Data/Oscars.csv", delimiter=';')
+    print(myData)
+    return jsonify(list(myData))

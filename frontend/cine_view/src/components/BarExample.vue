@@ -1,23 +1,36 @@
 <script>
-import { Bar } from 'vue-chartjs';
+import { HorizontalBar } from 'vue-chartjs';
 
 export default {
   name: 'bar-example',
-  extends: Bar,
+  extends: HorizontalBar,
   data: () => ({
     chartdata: {
-      labels: ['January', 'February'],
+      labels: ['January', 'February', 'March', 'April', ' May'],
       datasets: [
         {
           label: 'Data One',
           backgroundColor: '#f87979',
-          data: [40, 20],
+          data: [10, 20, 30, 40, 50],
+        },
+        {
+          label: 'Data Two',
+          backgroundColor: '#74992e',
+          data: [10, 20, 30, 40, 50],
         },
       ],
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
+        scales: {
+            xAxes: [{
+                stacked: true
+            }],
+            yAxes: [{
+                stacked: true
+            }]
+        },
+        responsive: true,
+        maintainAspectRatio: false,
     },
   }),
   mounted() {

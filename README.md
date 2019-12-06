@@ -4,9 +4,11 @@
 
 Actuellement, uniquement valable pour MacOS ou Linux.
 
+* Installer sqlite3
 * pip install -r requirements.txt
 * /bin/bash prepare_env.sh
 * cd backend/
+* python Database.py
 * . venv/bin/activate
 * ./bootstrap.sh
 * Dans un autre terminale
