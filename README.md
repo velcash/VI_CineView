@@ -2,10 +2,18 @@
 
 # How to setup and run
 
-Currently only available for Mac and Linux
+Actuellement, uniquement valable pour MacOS ou Linux.
 
 * pip install -r requirements.txt
 * /bin/bash prepare_env.sh
+* cd backend/
+* . venv/bin/activate
+* ./bootstrap.sh
+* Dans un autre terminale
+* cd frontend/
+* . env/bin/activate
+* cd cine_view
+* npm run serve
 
 # Sujet
 
@@ -18,3 +26,4 @@ Currently only available for Mac and Linux
 * Le genre a-t-il une importance pour recevoir une récompense?
 * Le budget a-t-il une importance pour le classement au box office ou pour une récompense?
 * Y-a-t-il des surprises (des anomalies)?
+
