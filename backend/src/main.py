@@ -2,8 +2,8 @@
 
 from flask import Flask, jsonify
 from flask_cors import CORS
-import pandas as pd
 from pathlib import Path
+from sqlalchemy import create_engine
 
 
 app = Flask(__name__)
@@ -13,7 +13,6 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 
 @app.route('/')
 def rootPage():
-    parentPath = Path(__file__).parent.parent.parent
-    myData = pd.read_csv(str(parentPath) + "/Data/Oscars.csv", delimiter=';')
-    print(myData)
-    return jsonify(list(myData))
+    parentPath = Path(__file__).parent.parent
+    engine = create_engine('sqlite:///' + str(parentPath) + "/cine_view.db")
+    return jsonify(engine.execute("SELECT * from palme"))
