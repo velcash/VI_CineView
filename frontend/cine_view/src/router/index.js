@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Ping from '../components/Ping.vue';
 import Home from '../components/Home.vue';
 import 'chart.js';
 
@@ -11,11 +10,6 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-  },
-  {
-    path: '/ping',
-    name: 'Ping',
-    component: Ping,
   },
 ];
 
