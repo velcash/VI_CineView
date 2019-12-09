@@ -4,6 +4,7 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from pathlib import Path
 from sqlalchemy import create_engine
+from collections import Counter
 
 
 app = Flask(__name__)
@@ -22,6 +23,21 @@ def parse_query(q):
             d = {**d, **{column: value}}
         a.append(d)
     return a
+
+def parse_genre(q):
+    a = []
+    for u in q:
+        for column, value in u.items():
+            if value.find('|') == -1:
+                a.append(value)
+            else:
+                a.append(value.split('|', 1)[0])
+    return Counter(a)
+
+@app.route('/getGenre')
+def getGenre():
+    return jsonify(json_list=parse_genre(
+        engine.execute("SELECT genres from boxoffice WHERE revenue > 0 AND budget > 0")))
 
 @app.route('/budgetAscending')
 def budgetAscending():

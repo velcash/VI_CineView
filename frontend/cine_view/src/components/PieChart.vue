@@ -4,22 +4,32 @@ import { Pie } from 'vue-chartjs';
 export default {
   name: 'PieChart',
   extends: Pie,
+  props: [ 'genres' , 'genreCount' ],
   data: () => ({
-    chartdata: {
-      datasets: [{
-        backgroundColor: ['#f87979', '#74992e', '#74992e'],
-        data: [10, 20, 30],
-      }],
-      labels: [
-        'Red',
-        'Yellow',
-        'Blue',
-      ],
-    },
-    options: {},
+      datacollection: null,
   }),
+  methods: {
+      fillData: function (g, gc) {
+          this.datacollection = {
+              datasets: [{
+                data: gc,
+              }],
+              labels: g,
+          }
+      }
+  },
+  watch: {
+      genres () {
+          this.fillData( this.genres, this.genreCount);
+          this.renderChart(this.datacollection, this.options);
+      },
+      genreCount () {
+          this.fillData( this.genres, this.genreCount);
+          this.renderChart(this.datacollection, this.options);
+      }
+  },
   mounted() {
-    this.renderChart(this.chartdata, this.options);
+    this.renderChart(this.datacollection, this.options);
   },
 };
 </script>

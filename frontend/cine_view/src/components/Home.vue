@@ -89,7 +89,7 @@
         </div>
         <div class="row">
           <div class="col mini-box">
-            <pie-chart/>
+            <pie-chart :genres="genre" :genre-count="genreCount"/>
           </div>
         </div>
       </div>
@@ -115,6 +115,8 @@ export default {
         budget: [],
         income: [],
         title: [],
+        genre: [],
+        genreCount: [],
     }
   },
 
@@ -179,6 +181,20 @@ export default {
           console.error(error);
         });
     },
+    getGenre: function() {
+        const path = 'http://localhost:5000/getGenre';
+        axios.get(path)
+          .then((res) => {
+            for (let [key, value] of Object.entries(res.data.json_list)) {
+                this.genreCount.push(value);
+                this.genre.push(key);
+            }
+          })
+          .catch((error) => {
+            // eslint-disable-next-line
+            console.error(error);
+          });
+    },
     filterByOscars: function() {
         this.filterOscars = !this.filterOscars;
         console.log(this.filterOscars);
@@ -202,6 +218,7 @@ export default {
   },
   created() {
     this.getIncomeDescending();
+    this.getGenre();
   },
 };
 </script>
