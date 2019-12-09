@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col big-box">
-        <bar-example></bar-example>
+        <bar-example :title="title" :budget="budget" :income="income"></bar-example>
       </div>
       <div class="col">
         <div class="row">
@@ -48,6 +48,7 @@
                         <input type="radio"
                                class="form-check-input"
                                name="optradio"
+                               checked
                                v-on:change="getIncomeDescending">Descending Income
                       </label>
                     </div>
@@ -100,6 +101,7 @@
 import BarExample from './BarExample.vue';
 import PieChart from './PieChart.vue';
 import Slider from './Slider.vue';
+import axios from 'axios';
 
 export default {
   components: { BarExample, Slider, PieChart },
@@ -109,25 +111,73 @@ export default {
         orderState: 'ba',
         filterPalme: false,
         filterOscars: false,
+        boxOffices: [],
+        budget: [],
+        income: [],
+        title: [],
     }
   },
 
   methods: {
     getBudgetAscending: function() {
       this.orderState = 'ba';
-      console.log(this.orderState);
+      const path = 'http://localhost:5000/budgetAscending';
+      axios.get(path)
+        .then((res) => {
+          this.boxOffices = res.data.json_list;
+          this.parseBudget();
+          this.parseIncome();
+          this.parseTitle();
+        })
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.error(error);
+        });
     },
     getBudgetDescending: function() {
       this.orderState = 'bd';
-      console.log(this.orderState);
+      const path = 'http://localhost:5000/budgetDescending';
+      axios.get(path)
+        .then((res) => {
+          this.boxOffices = res.data.json_list;
+          this.parseBudget();
+          this.parseIncome();
+          this.parseTitle();
+        })
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.error(error);
+        });
     },
     getIncomeAscending: function() {
       this.orderState = 'ia';
-      console.log(this.orderState);
+      const path = 'http://localhost:5000/incomeAscending';
+      axios.get(path)
+        .then((res) => {
+          this.boxOffices = res.data.json_list;
+          this.parseBudget();
+          this.parseIncome();
+          this.parseTitle();
+        })
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.error(error);
+        });
     },
     getIncomeDescending: function() {
       this.orderState = 'id';
-      console.log(this.orderState);
+      const path = 'http://localhost:5000/incomeDescending';
+      axios.get(path)
+        .then((res) => {
+          this.boxOffices = res.data.json_list;
+          this.parseBudget();
+          this.parseIncome();
+          this.parseTitle();
+        })
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.error(error);
+        });
     },
     filterByOscars: function() {
         this.filterOscars = !this.filterOscars;
@@ -136,7 +186,22 @@ export default {
     filterByPalme: function() {
         this.filterPalme = !this.filterPalme;
         console.log(this.filterPalme);
+    },
+    parseBudget: function() {
+        this.budget = [];
+        this.boxOffices.forEach(element => this.budget.push(element.budget));
+    },
+      parseIncome: function() {
+        this.income = [];
+        this.boxOffices.forEach(element => this.income.push(element.revenue));
+    },
+    parseTitle: function() {
+        this.title = [];
+        this.boxOffices.forEach(element => this.title.push(element.title));
     }
+  },
+  created() {
+    this.getIncomeDescending();
   },
 };
 </script>

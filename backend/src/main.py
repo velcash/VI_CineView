@@ -11,8 +11,35 @@ app.config.from_object(__name__)
 
 CORS(app, resources={r'/*': {'origins': '*'}})
 
+parentPath = Path(__file__).parent.parent
+engine = create_engine('sqlite:///' + str(parentPath) + "/cine_view.db")
+
+def parse_query(q):
+    d, a = {}, []
+    for u in q:
+        for column, value in u.items():
+            # build up the dictionary
+            d = {**d, **{column: value}}
+        a.append(d)
+    return a
+
+@app.route('/budgetAscending')
+def budgetAscending():
+    return jsonify(json_list = parse_query(engine.execute("SELECT * from boxoffice ORDER BY budget ASC LIMIT 10")))
+
+@app.route('/budgetDescending')
+def budgetDescending():
+    return jsonify(json_list = parse_query(engine.execute("SELECT * from boxoffice ORDER BY budget DESC LIMIT 10")))
+
+@app.route('/incomeAscending')
+def incomeAscending():
+    return jsonify(json_list = parse_query(engine.execute("SELECT * from boxoffice ORDER BY revenue ASC LIMIT 10")))
+
+@app.route('/incomeDescending')
+def incomeDescending():
+    return jsonify(json_list = parse_query(engine.execute("SELECT * from boxoffice ORDER BY revenue DESC LIMIT 10")))
+
+
 @app.route('/')
 def rootPage():
-    parentPath = Path(__file__).parent.parent
-    engine = create_engine('sqlite:///' + str(parentPath) + "/cine_view.db")
-    return jsonify(engine.execute("SELECT * from palme"))
+    return incomeDescending

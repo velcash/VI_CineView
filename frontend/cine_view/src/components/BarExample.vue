@@ -1,32 +1,38 @@
 <script>
 import { HorizontalBar } from 'vue-chartjs';
-
 export default {
   name: 'bar-example',
   extends: HorizontalBar,
+  props: ['budget', 'income', 'title'],
+  methods: {
+    fillData (label, budget, income) {
+        this.datacollection = {
+            // Data for the y-axis of the chart
+            labels: label,
+            datasets: [
+                {
+                    label: 'Budget',
+                    backgroundColor: '#f87979',
+                    data: budget,
+                },
+                {
+                    label: 'Income',
+                    backgroundColor: '#74992e',
+                    data: income,
+                },
+            ],
+        }
+    }
+  },
   data: () => ({
-    chartdata: {
-      labels: ['January', 'February', 'March', 'April', ' May'],
-      datasets: [
-        {
-          label: 'Data One',
-          backgroundColor: '#f87979',
-          data: [10, 20, 30, 40, 50],
-        },
-        {
-          label: 'Data Two',
-          backgroundColor: '#74992e',
-          data: [10, 20, 30, 40, 50],
-        },
-      ],
-    },
+    datacollection: null,
     options: {
         scales: {
             xAxes: [{
-                stacked: true
+                stacked: false
             }],
             yAxes: [{
-                stacked: true
+                stacked: false
             }]
         },
         responsive: true,
@@ -34,8 +40,18 @@ export default {
     },
   }),
   mounted() {
-    this.renderChart(this.chartdata, this.options);
+    this.renderChart(this.datacollection, this.options);
   },
+  watch: {
+      budget () {
+          this.fillData(this.title, this.budget, this.income);
+          this.renderChart(this.datacollection, this.options);
+      },
+      income () {
+          this.fillData(this.title, this.budget, this.income);
+          this.renderChart(this.datacollection, this.options);
+      }
+  }
 };
 </script>
 
