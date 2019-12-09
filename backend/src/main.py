@@ -25,19 +25,19 @@ def parse_query(q):
 
 @app.route('/budgetAscending')
 def budgetAscending():
-    return jsonify(json_list = parse_query(engine.execute("SELECT * from boxoffice ORDER BY budget ASC LIMIT 10")))
+    return jsonify(json_list = parse_query(engine.execute("SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 ORDER BY budget ASC LIMIT 10")))
 
 @app.route('/budgetDescending')
 def budgetDescending():
-    return jsonify(json_list = parse_query(engine.execute("SELECT * from boxoffice ORDER BY budget DESC LIMIT 10")))
+    return jsonify(json_list = parse_query(engine.execute("SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 ORDER BY budget DESC LIMIT 10")))
 
 @app.route('/incomeAscending')
 def incomeAscending():
-    return jsonify(json_list = parse_query(engine.execute("SELECT * from boxoffice ORDER BY revenue ASC LIMIT 10")))
+    return jsonify(json_list = parse_query(engine.execute("SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 ORDER BY revenue ASC LIMIT 10")))
 
 @app.route('/incomeDescending')
 def incomeDescending():
-    return jsonify(json_list = parse_query(engine.execute("SELECT * from boxoffice ORDER BY revenue DESC LIMIT 10")))
+    return jsonify(json_list = parse_query(engine.execute("SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 ORDER BY revenue DESC LIMIT 10")))
 
 
 @app.route('/')
