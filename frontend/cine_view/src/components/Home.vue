@@ -124,7 +124,10 @@ export default {
     getBudgetAscending: function() {
       this.orderState = 'ba';
       const path = 'http://localhost:5000/budgetAscending';
-      axios.get(path)
+      axios.post(path, {
+            palme: this.filterPalme,
+            oscar: this.filterOscars,
+        })
         .then((res) => {
           this.boxOffices = res.data.json_list;
           this.parseBudget();
@@ -139,7 +142,10 @@ export default {
     getBudgetDescending: function() {
       this.orderState = 'bd';
       const path = 'http://localhost:5000/budgetDescending';
-      axios.get(path)
+      axios.post(path, {
+            palme: this.filterPalme,
+            oscar: this.filterOscars,
+        })
         .then((res) => {
           this.boxOffices = res.data.json_list;
           this.parseBudget();
@@ -154,7 +160,10 @@ export default {
     getIncomeAscending: function() {
       this.orderState = 'ia';
       const path = 'http://localhost:5000/incomeAscending';
-      axios.get(path)
+      axios.post(path, {
+            palme: this.filterPalme,
+            oscar: this.filterOscars,
+        })
         .then((res) => {
           this.boxOffices = res.data.json_list;
           this.parseBudget();
@@ -169,7 +178,10 @@ export default {
     getIncomeDescending: function() {
       this.orderState = 'id';
       const path = 'http://localhost:5000/incomeDescending';
-      axios.get(path)
+      axios.post(path, {
+            palme: this.filterPalme,
+            oscar: this.filterOscars,
+        })
         .then((res) => {
           this.boxOffices = res.data.json_list;
           this.parseBudget();
@@ -197,11 +209,29 @@ export default {
     },
     filterByOscars: function() {
         this.filterOscars = !this.filterOscars;
-        console.log(this.filterOscars);
+        this.getFilterByRec(this.orderState, this.filterPalme, this.filterOscars);
     },
     filterByPalme: function() {
         this.filterPalme = !this.filterPalme;
-        console.log(this.filterPalme);
+        this.getFilterByRec(this.orderState, this.filterPalme, this.filterOscars);
+    },
+    getFilterByRec: function(type, palme, oscar) {
+        const path = 'http://localhost:5000/getFilterByRec';
+        axios.post(path, {
+            type: type,
+            palme: palme,
+            oscar: oscar,
+        })
+        .then((res) => {
+          this.boxOffices = res.data.json_list;
+          this.parseBudget();
+          this.parseIncome();
+          this.parseTitle();
+        })
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.error(error);
+        });
     },
     parseBudget: function() {
         this.budget = [];
@@ -214,10 +244,25 @@ export default {
     parseTitle: function() {
         this.title = [];
         this.boxOffices.forEach(element => this.title.push(element.title));
+    },
+    getHome: function() {
+      this.orderState = 'id';
+      const path = 'http://localhost:5000/';
+      axios.get(path)
+        .then((res) => {
+          this.boxOffices = res.data.json_list;
+          this.parseBudget();
+          this.parseIncome();
+          this.parseTitle();
+        })
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.error(error);
+        });
     }
   },
   created() {
-    this.getIncomeDescending();
+    this.getHome();
     this.getGenre();
   },
 };

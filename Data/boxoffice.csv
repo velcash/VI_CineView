@@ -1,4 +1,4 @@
-id,title,genres,release_date,revenue,budget,country
+id,title,genres,release_date,revenue,budget,country,boxOffice,palme
 19995,Avatar,Action|Adventure|Fantasy|Science Fiction,2009.0,2787965087,237000000,United States of America
 24428,The Avengers,Science Fiction|Action|Adventure,2012.0,1519557910,220000000,United States of America
 135397,Jurassic World,Action|Adventure|Science Fiction|Thriller,2015.0,1513528810,150000000,United States of America
@@ -112,7 +112,7 @@ id,title,genres,release_date,revenue,budget,country
 10140,The Chronicles of Narnia: The Voyage of the Dawn Treader,Adventure|Family|Fantasy,2010.0,415686217,155000000,United States of America
 324668,Jason Bourne,Action|Thriller,2016.0,415484914,120000000,United Kingdom
 76170,The Wolverine,Action|Science Fiction|Adventure|Fantasy,2013.0,415440673,120000000,United Kingdom
-45269,The King's Speech,Drama|History,2010.0,414211549,15000000,United Kingdom
+45269,The King's Speech,Drama|History,2010.0,414211549,15000000,United Kingdom,1,0
 18360,Night at the Museum: Battle of the Smithsonian,Adventure|Fantasy|Action|Comedy|Family,2009.0,413106170,150000000,United States of America
 68726,Pacific Rim,Action|Science Fiction|Adventure,2013.0,407602906,180000000,United States of America
 70981,Prometheus,Science Fiction|Adventure|Mystery,2012.0,403170142,130000000,United Kingdom
@@ -234,7 +234,7 @@ id,title,genres,release_date,revenue,budget,country
 10200,The Day the Earth Stood Still,Drama|Science Fiction|Thriller,2008.0,233093859,80000000,Canada
 18823,Clash of the Titans,Adventure|Fantasy|Action,2010.0,232713139,125000000,United States of America
 65754,The Girl with the Dragon Tattoo,Thriller|Crime|Mystery|Drama,2011.0,232617430,90000000,Norway
-68734,Argo,Drama|Thriller,2012.0,232324128,44500000,United States of America
+68734,Argo,Drama|Thriller,2012.0,232324128,44500000,United States of America,1,0
 11665,Get Smart,Action|Comedy|Thriller,2008.0,230685453,80000000,Canada
 43074,Ghostbusters,Action|Fantasy|Comedy,2016.0,229147509,144000000,United States of America
 40805,The Green Hornet,Action|Crime|Comedy,2011.0,227817248,120000000,United States of America
@@ -291,7 +291,7 @@ id,title,genres,release_date,revenue,budget,country
 7446,Tropic Thunder,Action|Comedy,2008.0,188072649,92000000,United States of America
 12429,Ponyo,Animation|Family,2008.0,187479518,41677699,Japan
 58224,Mr. Popper's Penguins,Comedy|Family,2011.0,187361754,55000000,United States of America
-76203,12 Years a Slave,Drama|History,2013.0,187000000,20000000,United States of America
+76203,12 Years a Slave,Drama|History,2013.0,187000000,20000000,United States of America,1,0
 19912,The Final Destination,Horror|Mystery,2009.0,186167139,40000000,United States of America
 44826,Hugo,Adventure|Drama|Family,2011.0,185770160,170000000,France
 13183,Watchmen,Action|Mystery|Science Fiction,2009.0,185258983,130000000,United States of America
@@ -395,7 +395,7 @@ id,title,genres,release_date,revenue,budget,country
 137093,Last Vegas,Comedy,2013.0,134402450,28000000,United States of America
 196867,Annie,Comedy|Drama|Family,2014.0,133821816,65000000,United States of America
 257088,Point Break,Action|Crime|Thriller,2015.0,133718711,105000000,Germany
-74643,The Artist,Drama|Comedy|Romance,2011.0,133432856,15000000,Belgium
+74643,The Artist,Drama|Comedy|Romance,2011.0,133432856,15000000,Belgium,1,0
 318846,The Big Short,Comedy|Drama,2015.0,133346506,28000000,United States of America
 2395,Asterix at the Olympic Games,Fantasy|Adventure|Comedy|Family,2008.0,132900000,97250400,Belgium
 97630,Zero Dark Thirty,Thriller|Drama|History,2012.0,132820716,40000000,United States of America
@@ -478,7 +478,7 @@ id,title,genres,release_date,revenue,budget,country
 296099,Vacation,Comedy,2015.0,104384188,31000000,United States of America
 280092,Insidious: Chapter 3,Drama|Horror|Thriller,2015.0,104303851,10000000,Canada
 242512,Ouija,Horror,2014.0,103590271,5000000,Japan
-194662,Birdman,Drama|Comedy,2014.0,103215094,18000000,United States of America
+194662,Birdman,Drama|Comedy,2014.0,103215094,18000000,United States of America,1,0
 157353,Transcendence,Thriller|Science Fiction|Drama|Mystery,2014.0,103039258,100000000,China
 43347,Love & Other Drugs,Drama|Comedy|Romance,2010.0,102820008,30000000,United States of America
 19908,Zombieland,Comedy|Horror,2009.0,102391382,23600000,United States of America
@@ -546,7 +546,7 @@ id,title,genres,release_date,revenue,budget,country
 49730,Red Riding Hood,Fantasy|Thriller|Horror,2011.0,89162162,42000000,Canada
 302688,My Big Fat Greek Wedding 2,Romance|Comedy|Family,2016.0,88923251,18000000,Canada
 228194,The Hundred-Foot Journey,Drama,2014.0,88880821,22000000,India
-314365,Spotlight,Drama|Thriller|History,2015.0,88346473,20000000,Canada
+314365,Spotlight,Drama|Thriller|History,2015.0,88346473,20000000,Canada,1,0
 89492,This Is 40,Comedy,2012.0,88058786,35000000,United States of America
 16995,State of Play,Action,2009.0,87784194,60000000,France
 122906,About Time,Comedy|Drama|Science Fiction,2013.0,87100449,0,United Kingdom
@@ -695,7 +695,7 @@ id,title,genres,release_date,revenue,budget,country
 29427,The Crazies,Mystery|Horror|Action,2010.0,54956140,20000000,United States of America
 239563,St. Vincent,Comedy,2014.0,54837234,13000000,United States of America
 76489,The Three Stooges,Comedy,2012.0,54819301,30000000,United States of America
-8967,The Tree of Life,Drama|Fantasy,2011.0,54674226,32000000,United States of America
+8967,The Tree of Life,Drama|Fantasy,2011.0,54674226,32000000,United States of America,0,1
 10139,Milk,History|Drama,2008.0,54586584,20000000,United States of America
 192141,No Escape,Action|Thriller,2015.0,54418872,5000000,United States of America
 72207,The Five-Year Engagement,Comedy,2012.0,53909751,30000000,United States of America
@@ -779,7 +779,7 @@ id,title,genres,release_date,revenue,budget,country
 22824,The Fourth Kind,Mystery|Science Fiction|Thriller,2009.0,42333295,10000000,United States of America
 10358,Zack and Miri Make a Porno,Comedy,2008.0,42105111,24000000,United States of America
 38073,Going the Distance,Comedy|Drama|Romance,2010.0,42045846,32000000,United States of America
-12162,The Hurt Locker,Drama|Thriller|War,2008.0,42000000,15000000,United States of America
+12162,The Hurt Locker,Drama|Thriller|War,2008.0,42000000,15000000,United States of America,1,0
 82687,The Guilt Trip,Comedy,2012.0,41863726,40000000,United States of America
 12177,The Love Guru,Comedy|Romance,2008.0,41819064,62000000,United States of America
 8456,Never Back Down,Drama|Action,2008.0,41627431,20000000,United States of America
@@ -959,7 +959,7 @@ id,title,genres,release_date,revenue,budget,country
 130150,Labor Day,Drama,2013.0,20275812,18000000,United States of America
 12690,Appaloosa,Drama|Western|Crime,2008.0,20211394,20000000,United States of America
 8338,Blindness,Drama|Mystery|Science Fiction|Thriller,2008.0,19844979,25000000,Brazil
-86837,Amour,Drama|Romance,2012.0,19839492,8900000,France
+86837,Amour,Drama|Romance,2012.0,19839492,8900000,France,0,1
 43931,My Soul to Take,Drama|Horror|Mystery|Thriller,2010.0,19829957,25000000,United States of America
 98357,Broken City,Thriller|Crime|Drama,2013.0,19701164,56000000,United States of America
 218043,Left Behind,Thriller|Action|Science Fiction,2014.0,19682924,16000000,United States of America
