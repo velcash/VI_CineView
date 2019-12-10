@@ -7,6 +7,15 @@ export default {
   props: [ 'genres' , 'genreCount' ],
   data: () => ({
       datacollection: null,
+      options: {
+          title: {
+              display: true,
+              text: 'Genre distribution',
+          },
+          legend: {
+            position: 'right',
+          },
+      },
   }),
   methods: {
       fillData: function (g, gc) {
