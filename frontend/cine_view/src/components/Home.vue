@@ -2,7 +2,8 @@
   <div class="container">
     <div class="row">
       <div class="col big-box">
-        <bar-example :title="title" :budget="budget" :income="income" :genre="barChartGenres" :release_date="barChartReleaseDate"></bar-example>
+        <bar-example :title="title" :budget="budget" :income="income" :genre="barChartGenres" :release_date="barChartReleaseDate"
+        :oscars="barChartRecOscars" :palme="barChartRecPalmes"></bar-example>
       </div>
       <div class="col">
         <div class="row" style="margin-bottom: 30px">
@@ -138,6 +139,8 @@ export default {
         boxOffices: [],
         barChartGenres: [],
         barChartReleaseDate: [],
+        barChartRecOscars: [],
+        barChartRecPalmes: [],
         budget: [],
         income: [],
         title: [],
@@ -167,6 +170,8 @@ export default {
           this.parseTitle();
           this.parseBarchartGenre();
           this.parseReleaseDate();
+          this.parseRecOscars();
+          this.parseRecPalme();
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -191,6 +196,8 @@ export default {
           this.parseTitle();
           this.parseBarchartGenre();
           this.parseReleaseDate();
+          this.parseRecOscars();
+          this.parseRecPalme();
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -215,6 +222,8 @@ export default {
           this.parseTitle();
           this.parseBarchartGenre();
           this.parseReleaseDate();
+          this.parseRecOscars();
+          this.parseRecPalme();
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -239,6 +248,8 @@ export default {
           this.parseTitle();
           this.parseBarchartGenre();
           this.parseReleaseDate();
+          this.parseRecOscars();
+          this.parseRecPalme();
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -293,6 +304,8 @@ export default {
           this.parseTitle();
           this.parseBarchartGenre();
           this.parseReleaseDate();
+          this.parseRecOscars();
+          this.parseRecPalme();
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -319,6 +332,32 @@ export default {
         this.barChartReleaseDate = [];
         this.boxOffices.forEach(element => this.barChartReleaseDate.push(element.release_date));
     },
+    parseRecOscars: function() {
+        this.barChartRecOscars = [];
+        var copie = [];
+        this.boxOffices.forEach(function (item) {
+            if (item.boxOffice == 1){
+                copie.push(true);
+            }
+            else{
+                copie.push(false);
+            }
+        });
+        this.barChartRecOscars = copie;
+    },
+      parseRecPalme: function() {
+        this.barChartRecPalmes = [];
+        var copie = [];
+        this.boxOffices.forEach(function (item) {
+            if (item.palme == 1){
+                copie.push(true);
+            }
+            else{
+                copie.push(false);
+            }
+        });
+        this.barChartRecPalmes = copie;
+    },
     getHome: function() {
       this.orderState = 'id';
       const path = 'http://localhost:5000/';
@@ -330,6 +369,8 @@ export default {
           this.parseTitle();
           this.parseBarchartGenre();
           this.parseReleaseDate();
+          this.parseRecOscars();
+          this.parseRecPalme();
         })
         .catch((error) => {
           // eslint-disable-next-line
