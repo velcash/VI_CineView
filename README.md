@@ -71,3 +71,15 @@ L'affichage des proportions varie en fonction de ce que l'utilisateur a sélecti
 
 
 # Implementation technique
+
+Techniquement, nous avons un backend en python3 avec les données dans une DB SQLite.
+La communication se fait avec le framework flask.
+Concernant, la vue, elle est faite avec VueJS. Pour les chartes, nous utilisons la lib __ChartJS__ et le slider 
+vient de la lib __vue-slider__.
+
+La gestion des filtres se font au travers des requêtes SQL composées à partir des informations de la vue. Puis, nous 
+parsons le résultat afin d'afficher ce qui est nécessaire dans chaque graphe.
+
+# Sketches
+
+TODO
