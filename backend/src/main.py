@@ -37,7 +37,7 @@ def parse_genre(q):
 @app.route('/getGenre')
 def getGenre():
     return jsonify(json_list=parse_genre(
-        engine.execute("SELECT genres from boxoffice WHERE revenue > 0 AND budget > 0")))
+        engine.execute("SELECT genres from boxofficeRanked WHERE revenue > 0 AND budget > 0")))
 
 @app.route('/getFilterByRec',  methods=['POST'])
 def getFilterByRec():
@@ -56,36 +56,36 @@ def getFilterByRec():
 def queryBudgetAscending(filter, startDate, endDate):
     if len(filter) > 0:
         return jsonify(json_list=parse_query(
-        engine.execute("SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} AND ({}) ORDER BY budget ASC LIMIT 10".format(startDate, endDate, filter))))
+        engine.execute("SELECT * from boxofficeRanked WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} AND ({}) ORDER BY budget ASC LIMIT 10".format(startDate, endDate, filter))))
     else:
-        return jsonify(json_list=parse_query(engine.execute("SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} ORDER BY budget ASC LIMIT 10".format(startDate, endDate))))
+        return jsonify(json_list=parse_query(engine.execute("SELECT * from boxofficeRanked WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} ORDER BY budget ASC LIMIT 10".format(startDate, endDate))))
 
 def queryBudgetDescending(filter, startDate, endDate):
     if len(filter) > 0:
         return jsonify(json_list=parse_query(engine.execute(
-        "SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} AND ({}) ORDER BY budget DESC LIMIT 10".format(
+        "SELECT * from boxofficeRanked WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} AND ({}) ORDER BY budget DESC LIMIT 10".format(
             startDate, endDate, filter))))
     else:
         return jsonify(json_list=parse_query(engine.execute(
-            "SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} ORDER BY budget DESC LIMIT 10".format(startDate, endDate))))
+            "SELECT * from boxofficeRanked WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} ORDER BY budget DESC LIMIT 10".format(startDate, endDate))))
 
 def queryIncomingAscending(filter, startDate, endDate):
     if len(filter) > 0:
         return jsonify(json_list=parse_query(engine.execute(
-        "SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} AND ({}) ORDER BY revenue ASC LIMIT 10".format(
+        "SELECT * from boxofficeRanked WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} AND ({}) ORDER BY revenue ASC LIMIT 10".format(
             startDate, endDate, filter))))
     else:
         return jsonify(json_list=parse_query(engine.execute(
-            "SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} ORDER BY revenue ASC LIMIT 10".format(startDate, endDate))))
+            "SELECT * from boxofficeRanked WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} ORDER BY revenue ASC LIMIT 10".format(startDate, endDate))))
 
 def queryIncomingDescending(filter, startDate, endDate):
     if len(filter) > 0:
         return jsonify(json_list=parse_query(engine.execute(
-        "SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} AND ({}) ORDER BY revenue DESC LIMIT 10".format(
+        "SELECT * from boxofficeRanked WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} AND ({}) ORDER BY revenue DESC LIMIT 10".format(
             startDate, endDate, filter))))
     else:
         return jsonify(json_list=parse_query(engine.execute(
-            "SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} ORDER BY revenue DESC LIMIT 10".format(startDate, endDate))))
+            "SELECT * from boxofficeRanked WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} ORDER BY revenue DESC LIMIT 10".format(startDate, endDate))))
 
 def prepareFilter(palme, oscar, usa, others):
     queryRec = ''

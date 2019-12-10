@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col big-box">
         <bar-example :title="title" :budget="budget" :income="income" :genre="barChartGenres" :release_date="barChartReleaseDate"
-        :oscars="barChartRecOscars" :palme="barChartRecPalmes"></bar-example>
+        :oscars="barChartRecOscars" :palme="barChartRecPalmes" :rank="rank"></bar-example>
       </div>
       <div class="col">
         <div class="row" style="margin-bottom: 30px">
@@ -141,6 +141,7 @@ export default {
         barChartReleaseDate: [],
         barChartRecOscars: [],
         barChartRecPalmes: [],
+        rank: [],
         budget: [],
         income: [],
         title: [],
@@ -172,6 +173,7 @@ export default {
           this.parseReleaseDate();
           this.parseRecOscars();
           this.parseRecPalme();
+          this.parseRank();
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -198,6 +200,7 @@ export default {
           this.parseReleaseDate();
           this.parseRecOscars();
           this.parseRecPalme();
+          this.parseRank();
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -224,6 +227,7 @@ export default {
           this.parseReleaseDate();
           this.parseRecOscars();
           this.parseRecPalme();
+          this.parseRank();
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -250,6 +254,7 @@ export default {
           this.parseReleaseDate();
           this.parseRecOscars();
           this.parseRecPalme();
+          this.parseRank();
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -306,6 +311,7 @@ export default {
           this.parseReleaseDate();
           this.parseRecOscars();
           this.parseRecPalme();
+          this.parseRank();
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -358,6 +364,10 @@ export default {
         });
         this.barChartRecPalmes = copie;
     },
+    parseRank: function() {
+      this.rank = [];
+      this.boxOffices.forEach(element => this.rank.push(element.rank));
+    },
     getHome: function() {
       this.orderState = 'id';
       const path = 'http://localhost:5000/';
@@ -371,6 +381,7 @@ export default {
           this.parseReleaseDate();
           this.parseRecOscars();
           this.parseRecPalme();
+          this.parseRank();
         })
         .catch((error) => {
           // eslint-disable-next-line

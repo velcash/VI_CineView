@@ -5,6 +5,6 @@ engine = create_engine('sqlite:///cine_view.db')
 
 data = df.DataFilter('../Data')
 
-data.load_BOdata('boxoffice.csv').to_sql('boxoffice', con=engine)
+data.load_BOdata('boxofficeRanked.csv').to_sql('boxofficeRanked', con=engine)
 data.load_oscarData('Oscars.csv').to_sql('oscars', con=engine)
 data.load_palmeData('palmeDor.csv').to_sql('palme', con=engine)

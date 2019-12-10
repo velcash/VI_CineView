@@ -4,9 +4,9 @@
     export default {
         name: 'bar-example',
         extends: HorizontalBar,
-        props: ['budget', 'income', 'title', 'genre', 'release_date', 'oscars', 'palme'],
+        props: ['budget', 'income', 'title', 'genre', 'release_date', 'oscars', 'palme', 'rank'],
         methods: {
-            fillData(label, budget, income, genre, release_date, oscars, palme) {
+            fillData(label, budget, income, genre, release_date, oscars, palme, rank) {
                 this.datacollection = {
                     // Data for the y-axis of the chart
                     labels: label,
@@ -19,6 +19,7 @@
                             release_date: release_date,
                             oscars: oscars,
                             palme: palme,
+                            rank: rank,
                         },
                         {
                             label: 'Income',
@@ -28,6 +29,7 @@
                             release_date: release_date,
                             oscars: oscars,
                             palme: palme,
+                            rank: rank,
                         },
                     ],
                 }
@@ -63,6 +65,7 @@
                         element.push('Release Date: ' + label.release_date[tooltipItem.index]);
                         element.push('Oscars :' + label.oscars[tooltipItem.index]);
                         element.push('Palme :' + label.palme[tooltipItem.index]);
+                        element.push('Rank of the movie :' + label.rank[tooltipItem.index]);
                         return element;
                     }
                   }
@@ -76,11 +79,11 @@
         },
         watch: {
             budget() {
-                this.fillData(this.title, this.budget, this.income, this.genre, this.release_date, this.oscars, this.palme);
+                this.fillData(this.title, this.budget, this.income, this.genre, this.release_date, this.oscars, this.palme, this.rank);
                 this.renderChart(this.datacollection, this.options);
             },
             income() {
-                this.fillData(this.title, this.budget, this.income, this.genre, this.release_date, this.oscars, this.palme);
+                this.fillData(this.title, this.budget, this.income, this.genre, this.release_date, this.oscars, this.palme, this.rank);
                 this.renderChart(this.datacollection, this.options);
             }
         }
