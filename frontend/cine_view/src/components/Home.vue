@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col big-box">
-        <bar-example :title="title" :budget="budget" :income="income"></bar-example>
+        <bar-example :title="title" :budget="budget" :income="income" :genre="barChartGenres" :release_date="barChartReleaseDate"></bar-example>
       </div>
       <div class="col">
         <div class="row" style="margin-bottom: 30px">
@@ -136,6 +136,8 @@ export default {
         startDate: '2008',
         endDate: '2016',
         boxOffices: [],
+        barChartGenres: [],
+        barChartReleaseDate: [],
         budget: [],
         income: [],
         title: [],
@@ -163,6 +165,8 @@ export default {
           this.parseBudget();
           this.parseIncome();
           this.parseTitle();
+          this.parseBarchartGenre();
+          this.parseReleaseDate();
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -185,6 +189,8 @@ export default {
           this.parseBudget();
           this.parseIncome();
           this.parseTitle();
+          this.parseBarchartGenre();
+          this.parseReleaseDate();
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -207,6 +213,8 @@ export default {
           this.parseBudget();
           this.parseIncome();
           this.parseTitle();
+          this.parseBarchartGenre();
+          this.parseReleaseDate();
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -229,6 +237,8 @@ export default {
           this.parseBudget();
           this.parseIncome();
           this.parseTitle();
+          this.parseBarchartGenre();
+          this.parseReleaseDate();
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -281,6 +291,8 @@ export default {
           this.parseBudget();
           this.parseIncome();
           this.parseTitle();
+          this.parseBarchartGenre();
+          this.parseReleaseDate();
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -299,6 +311,14 @@ export default {
         this.title = [];
         this.boxOffices.forEach(element => this.title.push(element.title));
     },
+    parseBarchartGenre: function() {
+        this.barChartGenres = [];
+        this.boxOffices.forEach(element => this.barChartGenres.push(element.genres));
+    },
+    parseReleaseDate: function() {
+        this.barChartReleaseDate = [];
+        this.boxOffices.forEach(element => this.barChartReleaseDate.push(element.release_date));
+    },
     getHome: function() {
       this.orderState = 'id';
       const path = 'http://localhost:5000/';
@@ -308,6 +328,8 @@ export default {
           this.parseBudget();
           this.parseIncome();
           this.parseTitle();
+          this.parseBarchartGenre();
+          this.parseReleaseDate();
         })
         .catch((error) => {
           // eslint-disable-next-line
