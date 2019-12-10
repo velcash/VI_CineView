@@ -40,7 +40,7 @@
                         stacked: false,
                         scaleLabel: {
                             display: true,
-                            labelString: 'Title',
+                            labelString: 'Movie Title',
                         },
                     }]
                 },

@@ -43,49 +43,49 @@ def getGenre():
 def getFilterByRec():
     content = request.json
     if content['type'] == 'id':
-        return queryIncomingDescending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']))
+        return queryIncomingDescending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']), content['startDate'], content['endDate'])
     else:
         if content['type'] == 'ia':
-            return queryIncomingAscending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']))
+            return queryIncomingAscending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']), content['startDate'], content['endDate'])
         else:
             if content['type'] == 'bd':
-                return queryBudgetDescending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']))
+                return queryBudgetDescending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']), content['startDate'], content['endDate'])
             else:
-                return queryBudgetAscending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']))
+                return queryBudgetAscending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']), content['startDate'], content['endDate'])
 
-def queryBudgetAscending(filter):
+def queryBudgetAscending(filter, startDate, endDate):
     if len(filter) > 0:
         return jsonify(json_list=parse_query(
-        engine.execute("SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 AND ({}) ORDER BY budget ASC LIMIT 10".format(filter))))
+        engine.execute("SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} AND ({}) ORDER BY budget ASC LIMIT 10".format(startDate, endDate, filter))))
     else:
-        return jsonify(json_list=parse_query(engine.execute("SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 ORDER BY budget ASC LIMIT 10")))
+        return jsonify(json_list=parse_query(engine.execute("SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} ORDER BY budget ASC LIMIT 10".format(startDate, endDate))))
 
-def queryBudgetDescending(filter):
+def queryBudgetDescending(filter, startDate, endDate):
     if len(filter) > 0:
         return jsonify(json_list=parse_query(engine.execute(
-        "SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 AND ({}) ORDER BY budget DESC LIMIT 10".format(
-            filter))))
+        "SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} AND ({}) ORDER BY budget DESC LIMIT 10".format(
+            startDate, endDate, filter))))
     else:
         return jsonify(json_list=parse_query(engine.execute(
-            "SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 ORDER BY budget DESC LIMIT 10")))
+            "SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} ORDER BY budget DESC LIMIT 10".format(startDate, endDate))))
 
-def queryIncomingAscending(filter):
+def queryIncomingAscending(filter, startDate, endDate):
     if len(filter) > 0:
         return jsonify(json_list=parse_query(engine.execute(
-        "SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 AND ({}) ORDER BY revenue ASC LIMIT 10".format(
-            filter))))
+        "SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} AND ({}) ORDER BY revenue ASC LIMIT 10".format(
+            startDate, endDate, filter))))
     else:
         return jsonify(json_list=parse_query(engine.execute(
-            "SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 ORDER BY revenue ASC LIMIT 10")))
+            "SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} ORDER BY revenue ASC LIMIT 10".format(startDate, endDate))))
 
-def queryIncomingDescending(filter):
+def queryIncomingDescending(filter, startDate, endDate):
     if len(filter) > 0:
         return jsonify(json_list=parse_query(engine.execute(
-        "SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 AND ({}) ORDER BY revenue DESC LIMIT 10".format(
-            filter))))
+        "SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} AND ({}) ORDER BY revenue DESC LIMIT 10".format(
+            startDate, endDate, filter))))
     else:
         return jsonify(json_list=parse_query(engine.execute(
-            "SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 ORDER BY revenue DESC LIMIT 10")))
+            "SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 AND release_date >= {} AND release_date <= {} ORDER BY revenue DESC LIMIT 10".format(startDate, endDate))))
 
 def prepareFilter(palme, oscar, usa, others):
     queryRec = ''
@@ -122,23 +122,23 @@ def prepareFilter(palme, oscar, usa, others):
 @app.route('/budgetAscending',  methods=['POST'])
 def budgetAscending():
     content = request.json
-    return queryBudgetAscending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']))
+    return queryBudgetAscending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']), content['startDate'], content['endDate'])
 
 @app.route('/budgetDescending',  methods=['POST'])
 def budgetDescending():
     content = request.json
-    return queryBudgetDescending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']))
+    return queryBudgetDescending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']), content['startDate'], content['endDate'])
 
 @app.route('/incomeAscending',  methods=['POST'])
 def incomeAscending():
     content = request.json
-    return queryIncomingAscending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']))
+    return queryIncomingAscending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']), content['startDate'], content['endDate'])
 
 @app.route('/incomeDescending',  methods=['POST'])
 def incomeDescending():
     content = request.json
-    return queryIncomingDescending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']))
+    return queryIncomingDescending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']), content['startDate'], content['endDate'])
 
 @app.route('/')
 def rootPage():
-    return queryIncomingDescending(prepareFilter(False, False, False, False))
+    return queryIncomingDescending(prepareFilter(False, False, False, False), 2008, 2016)

@@ -5,9 +5,10 @@
         <bar-example :title="title" :budget="budget" :income="income"></bar-example>
       </div>
       <div class="col">
-        <div class="row">
+        <div class="row" style="margin-bottom: 30px">
           <div class="col mini-box">
-            <slider></slider>
+            <span>Years filtering</span>
+            <vue-slider v-model="value" :data="data" :marks="true" :order="false"></vue-slider>
           </div>
         </div>
         <div class="row">
@@ -118,11 +119,12 @@
 <script>
 import BarExample from './BarExample.vue';
 import PieChart from './PieChart.vue';
-import Slider from './Slider.vue';
+import VueSlider from 'vue-slider-component';
+import 'vue-slider-component/theme/default.css';
 import axios from 'axios';
 
 export default {
-  components: { BarExample, Slider, PieChart },
+  components: { BarExample, VueSlider, PieChart },
 
   data: function() {
     return {
@@ -131,12 +133,16 @@ export default {
         filterOscars: false,
         filterUsa: false,
         filterOthers: false,
+        startDate: '2008',
+        endDate: '2016',
         boxOffices: [],
         budget: [],
         income: [],
         title: [],
         genre: [],
         genreCount: [],
+        value: [2008, 2016],
+        data: [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016],
     }
   },
 
@@ -149,6 +155,8 @@ export default {
             oscar: this.filterOscars,
             usa: this.filterUsa,
             others: this.filterOthers,
+            startDate: this.startDate,
+            endDate: this.endDate,
         })
         .then((res) => {
           this.boxOffices = res.data.json_list;
@@ -169,6 +177,8 @@ export default {
             oscar: this.filterOscars,
             usa: this.filterUsa,
             others: this.filterOthers,
+            startDate: this.startDate,
+            endDate: this.endDate,
         })
         .then((res) => {
           this.boxOffices = res.data.json_list;
@@ -189,6 +199,8 @@ export default {
             oscar: this.filterOscars,
             usa: this.filterUsa,
             others: this.filterOthers,
+            startDate: this.startDate,
+            endDate: this.endDate,
         })
         .then((res) => {
           this.boxOffices = res.data.json_list;
@@ -209,6 +221,8 @@ export default {
             oscar: this.filterOscars,
             usa: this.filterUsa,
             others: this.filterOthers,
+            startDate: this.startDate,
+            endDate: this.endDate,
         })
         .then((res) => {
           this.boxOffices = res.data.json_list;
@@ -237,21 +251,21 @@ export default {
     },
     filterByOscars: function() {
         this.filterOscars = !this.filterOscars;
-        this.getFilters(this.orderState, this.filterPalme, this.filterOscars, this.filterUsa, this.filterOthers);
+        this.getFilters(this.orderState, this.filterPalme, this.filterOscars, this.filterUsa, this.filterOthers, this.startDate, this.endDate);
     },
     filterByPalme: function() {
         this.filterPalme = !this.filterPalme;
-        this.getFilters(this.orderState, this.filterPalme, this.filterOscars, this.filterUsa, this.filterOthers);
+        this.getFilters(this.orderState, this.filterPalme, this.filterOscars, this.filterUsa, this.filterOthers, this.startDate, this.endDate);
     },
     filterByUsa: function() {
         this.filterUsa = !this.filterUsa;
-        this.getFilters(this.orderState, this.filterPalme, this.filterOscars, this.filterUsa, this.filterOthers);
+        this.getFilters(this.orderState, this.filterPalme, this.filterOscars, this.filterUsa, this.filterOthers, this.startDate, this.endDate);
     },
     filterByOthers: function() {
         this.filterOthers = !this.filterOthers;
-        this.getFilters(this.orderState, this.filterPalme, this.filterOscars, this.filterUsa, this.filterOthers);
+        this.getFilters(this.orderState, this.filterPalme, this.filterOscars, this.filterUsa, this.filterOthers, this.startDate, this.endDate);
     },
-    getFilters: function(type, palme, oscar, usa, others) {
+    getFilters: function(type, palme, oscar, usa, others, startDate, endDate) {
         const path = 'http://localhost:5000/getFilterByRec';
         axios.post(path, {
             type: type,
@@ -259,6 +273,8 @@ export default {
             oscar: oscar,
             usa: usa,
             others: others,
+            startDate: startDate,
+            endDate: endDate,
         })
         .then((res) => {
           this.boxOffices = res.data.json_list;
@@ -303,6 +319,14 @@ export default {
     this.getHome();
     this.getGenre();
   },
+  watch: {
+      value() {
+        this.value.sort((a, b) => a - b);
+        this.startDate = this.value[0];
+        this.endDate = this.value[1];
+        this.getFilters(this.orderState, this.filterPalme, this.filterOscars, this.filterUsa, this.filterOthers, this.startDate, this.endDate);
+      }
+  }
 };
 </script>
 
