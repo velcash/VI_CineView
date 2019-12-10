@@ -15,6 +15,18 @@ export default {
           legend: {
             position: 'right',
           },
+          tooltips: {
+                  callbacks: {
+                    label: function(tooltipItem, datacollection) {
+                        var label = datacollection.datasets[tooltipItem.datasetIndex];
+                        let sum = label.data.reduce((a,b) => a + b, 0);
+                        let pourcentage = label.data[tooltipItem.index] * 100 / sum;
+                        let element = '';
+                        element += datacollection.labels[tooltipItem.index] + ' : ' + pourcentage + '%';
+                        return element;
+                    }
+                  }
+                },
       },
   }),
   methods: {
