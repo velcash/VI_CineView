@@ -5,7 +5,6 @@ from flask_cors import CORS
 from pathlib import Path
 from sqlalchemy import create_engine
 from collections import Counter
-import sys
 
 
 app = Flask(__name__)
@@ -43,20 +42,16 @@ def getGenre():
 @app.route('/getFilterByRec',  methods=['POST'])
 def getFilterByRec():
     content = request.json
-    print(content, file=sys.stderr)
-    print(content['type'], file=sys.stderr)
-    print(content['palme'], file=sys.stderr)
-    print(content['oscar'], file=sys.stderr)
     if content['type'] == 'id':
-        return queryIncomingDescending(prepareFilter(content['palme'], content['oscar']))
+        return queryIncomingDescending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']))
     else:
         if content['type'] == 'ia':
-            return queryIncomingAscending(prepareFilter(content['palme'], content['oscar']))
+            return queryIncomingAscending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']))
         else:
             if content['type'] == 'bd':
-                return queryBudgetDescending(prepareFilter(content['palme'], content['oscar']))
+                return queryBudgetDescending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']))
             else:
-                return queryBudgetAscending(prepareFilter(content['palme'], content['oscar']))
+                return queryBudgetAscending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']))
 
 def queryBudgetAscending(filter):
     if len(filter) > 0:
@@ -92,38 +87,58 @@ def queryIncomingDescending(filter):
         return jsonify(json_list=parse_query(engine.execute(
             "SELECT * from boxoffice WHERE revenue > 0 AND budget > 0 ORDER BY revenue DESC LIMIT 10")))
 
-def prepareFilter(palme, oscar):
-    query = ''
+def prepareFilter(palme, oscar, usa, others):
+    queryRec = ''
+    queryCountry = ''
     if oscar == True:
-        query += 'boxOffice = 1.0'
+        queryRec += '(boxOffice = 1.0'
     if palme == True:
-        if len(query) == 0:
-            query += 'palme = 1.0'
+        if len(queryRec) == 0:
+            queryRec += 'palme = 1.0'
         else:
-            query += ' OR palme = 1.0'
-    return query
+            queryRec += ' OR palme = 1.0)'
+    else:
+        if len(queryRec) > 0:
+            queryRec += ')'
+    if usa == True:
+        if len(queryRec) == 0:
+            queryCountry += 'country = "United States of America"'
+        else:
+            queryCountry += ' AND country = "United States of America"'
+    if others == True:
+        if len(queryRec) == 0:
+            if len(queryCountry) == 0:
+                queryCountry = 'country != "United States of America"'
+            else:
+                queryCountry = ''
+        else:
+            if len(queryCountry) == 0:
+                queryCountry += ' AND country != "United States of America"'
+            else:
+                queryCountry = ''
+    return queryRec + queryCountry
 
 
 @app.route('/budgetAscending',  methods=['POST'])
 def budgetAscending():
     content = request.json
-    return queryBudgetAscending(prepareFilter(content['palme'], content['oscar']))
+    return queryBudgetAscending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']))
 
 @app.route('/budgetDescending',  methods=['POST'])
 def budgetDescending():
     content = request.json
-    return queryBudgetDescending(prepareFilter(content['palme'], content['oscar']))
+    return queryBudgetDescending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']))
 
 @app.route('/incomeAscending',  methods=['POST'])
 def incomeAscending():
     content = request.json
-    return queryIncomingAscending(prepareFilter(content['palme'], content['oscar']))
+    return queryIncomingAscending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']))
 
 @app.route('/incomeDescending',  methods=['POST'])
 def incomeDescending():
     content = request.json
-    return queryIncomingDescending(prepareFilter(content['palme'], content['oscar']))
+    return queryIncomingDescending(prepareFilter(content['palme'], content['oscar'], content['usa'], content['others']))
 
 @app.route('/')
 def rootPage():
-    return queryIncomingDescending(prepareFilter(False, False))
+    return queryIncomingDescending(prepareFilter(False, False, False, False))

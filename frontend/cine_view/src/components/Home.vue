@@ -82,17 +82,39 @@
                       </label>
                     </form>
                   </div>
+                  <div class="card-body">
+                    <form>
+                      <label class="form-check">
+                        <input class="form-check-input" type="checkbox" v-on:change="filterByUsa">
+                        <span class="form-check-label">
+                          USA
+                        </span>
+                      </label>
+                      <label class="form-check">
+                        <input class="form-check-input" type="checkbox" v-on:change="filterByOthers">
+                        <span class="form-check-label">
+                          Other Countries
+                        </span>
+                      </label>
+                    </form>
+                  </div>
                 </div>
               </article>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col mini-box">
-            <pie-chart :genres="genre" :genre-count="genreCount"/>
-          </div>
-        </div>
+       </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <span></span>
       </div>
+      <div class="col-6">
+        <pie-chart :genres="genre" :genre-count="genreCount"/>
+      </div>
+    </div>
+    <div class="col-3">
+        <span></span>
     </div>
   </div>
 </template>
@@ -111,6 +133,8 @@ export default {
         orderState: 'ba',
         filterPalme: false,
         filterOscars: false,
+        filterUsa: false,
+        filterOthers: false,
         boxOffices: [],
         budget: [],
         income: [],
@@ -127,6 +151,8 @@ export default {
       axios.post(path, {
             palme: this.filterPalme,
             oscar: this.filterOscars,
+            usa: this.filterUsa,
+            others: this.filterOthers,
         })
         .then((res) => {
           this.boxOffices = res.data.json_list;
@@ -145,6 +171,8 @@ export default {
       axios.post(path, {
             palme: this.filterPalme,
             oscar: this.filterOscars,
+            usa: this.filterUsa,
+            others: this.filterOthers,
         })
         .then((res) => {
           this.boxOffices = res.data.json_list;
@@ -163,6 +191,8 @@ export default {
       axios.post(path, {
             palme: this.filterPalme,
             oscar: this.filterOscars,
+            usa: this.filterUsa,
+            others: this.filterOthers,
         })
         .then((res) => {
           this.boxOffices = res.data.json_list;
@@ -181,6 +211,8 @@ export default {
       axios.post(path, {
             palme: this.filterPalme,
             oscar: this.filterOscars,
+            usa: this.filterUsa,
+            others: this.filterOthers,
         })
         .then((res) => {
           this.boxOffices = res.data.json_list;
@@ -209,18 +241,28 @@ export default {
     },
     filterByOscars: function() {
         this.filterOscars = !this.filterOscars;
-        this.getFilterByRec(this.orderState, this.filterPalme, this.filterOscars);
+        this.getFilters(this.orderState, this.filterPalme, this.filterOscars, this.filterUsa, this.filterOthers);
     },
     filterByPalme: function() {
         this.filterPalme = !this.filterPalme;
-        this.getFilterByRec(this.orderState, this.filterPalme, this.filterOscars);
+        this.getFilters(this.orderState, this.filterPalme, this.filterOscars, this.filterUsa, this.filterOthers);
     },
-    getFilterByRec: function(type, palme, oscar) {
+    filterByUsa: function() {
+        this.filterUsa = !this.filterUsa;
+        this.getFilters(this.orderState, this.filterPalme, this.filterOscars, this.filterUsa, this.filterOthers);
+    },
+    filterByOthers: function() {
+        this.filterOthers = !this.filterOthers;
+        this.getFilters(this.orderState, this.filterPalme, this.filterOscars, this.filterUsa, this.filterOthers);
+    },
+    getFilters: function(type, palme, oscar, usa, others) {
         const path = 'http://localhost:5000/getFilterByRec';
         axios.post(path, {
             type: type,
             palme: palme,
             oscar: oscar,
+            usa: usa,
+            others: others,
         })
         .then((res) => {
           this.boxOffices = res.data.json_list;
