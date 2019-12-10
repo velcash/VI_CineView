@@ -65,25 +65,22 @@
                 <header class="card-header">
                   <h6>Filter By</h6>
                 </header>
-                <div class="form-check">
-                  <div class="card-body">
-                    <form>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
                       <label class="form-check">
-                        <input class="form-check-input" type="checkbox" v-on:change="filterByOscars">
-                        <span class="form-check-label">
-                          Oscars
-                        </span>
-                      </label>
-                      <label class="form-check">
-                        <input class="form-check-input" type="checkbox" v-on:change="filterByPalme">
-                        <span class="form-check-label">
-                          Palme d'or
-                        </span>
-                      </label>
-                    </form>
-                  </div>
-                  <div class="card-body">
-                    <form>
+                          <input class="form-check-input" type="checkbox" v-on:change="filterByOscars">
+                          <span class="form-check-label">
+                            Oscars
+                          </span>
+                        </label>
+                        <label class="form-check">
+                          <input class="form-check-input" type="checkbox" v-on:change="filterByPalme">
+                          <span class="form-check-label">
+                            Palme d'or
+                          </span>
+                        </label>
+                    </li>
+                    <li class="list-group-item">
                       <label class="form-check">
                         <input class="form-check-input" type="checkbox" v-on:change="filterByUsa">
                         <span class="form-check-label">
@@ -96,9 +93,8 @@
                           Other Countries
                         </span>
                       </label>
-                    </form>
-                  </div>
-                </div>
+                    </li>
+                  </ul>
               </article>
             </div>
           </div>

@@ -13,12 +13,12 @@
                     datasets: [
                         {
                             label: 'Budget',
-                            backgroundColor: '#f87979',
+                            backgroundColor: '#FF4136',
                             data: budget,
                         },
                         {
                             label: 'Income',
-                            backgroundColor: '#74992e',
+                            backgroundColor: '#2ECC40',
                             data: income,
                         },
                     ],
