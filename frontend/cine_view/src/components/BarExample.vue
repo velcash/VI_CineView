@@ -20,6 +20,7 @@
                             oscars: oscars,
                             palme: palme,
                             rank: rank,
+                            income: income,
                         },
                         {
                             label: 'Income',
@@ -57,16 +58,22 @@
                 tooltips: {
                   callbacks: {
                     label: function(tooltipItem, datacollection) {
-                        var label = datacollection.datasets[tooltipItem.datasetIndex];
-                        let element = [];
-                        element.push(label.label + ' : ' + tooltipItem.value);
-                        element.push('Title : ' + tooltipItem.label);
-                        element.push('Genre: ' + label.genres[tooltipItem.index]);
-                        element.push('Release Date: ' + label.release_date[tooltipItem.index]);
-                        element.push('Oscars :' + label.oscars[tooltipItem.index]);
-                        element.push('Palme :' + label.palme[tooltipItem.index]);
-                        element.push('Rank of the movie :' + label.rank[tooltipItem.index]);
-                        return element;
+                        if (tooltipItem.datasetIndex == 0){
+                          var label = datacollection.datasets[tooltipItem.datasetIndex];
+                          let element = [];
+                          element.push(label.label + ' : ' + tooltipItem.value);
+                          element.push('Income :' +  label.income[tooltipItem.index]);
+                          element.push('Title : ' + tooltipItem.label);
+                          element.push('Genre: ' + label.genres[tooltipItem.index]);
+                          element.push('Release Date: ' + label.release_date[tooltipItem.index]);
+                          element.push('Oscars :' + label.oscars[tooltipItem.index]);
+                          element.push('Palme :' + label.palme[tooltipItem.index]);
+                          element.push('Rank of the movie :' + label.rank[tooltipItem.index]);
+                          return element;
+                         }
+                         else{
+                         return '';
+                         }
                     }
                   }
                 },
