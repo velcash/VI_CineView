@@ -1,4 +1,5 @@
 # VI_CineView
+## Aut: Miharisoa Andrianantenaina, Cubuk Funda, Dozot Gregory
 
 # Comment mettre en place le projet
 
@@ -36,8 +37,9 @@ Pour mettre en évidence les rapports qui peuvent y avoir entre le boxOffice , l
 - le Bar Chart horizontal
 - le pie Chart  
 
-L'idéal c'est de représenter toute l'information sur un seul graphique mais pour  assurer de mettre en oeuvre: "le seeking Mantra: overview first ",on aimerait que l'utilisateur aperçoit tout de suite les informations qu'on aimerait communiquer: Le fait d'avoir investit  sur un budget garanti-t-elle une bonne classement au box-office? ou bien l'attribution d'une récompense. Le genre a-t-il un impact au classement du box-office et à l'attribution de récompense. Etre mieux classé au box-office est -il garant d'une récompense?
-Alors  la relation box-office, budget et récompense, sera évidente sur le Bar Chart, mais même si on représente le genre sur ce graphique avec despictogrammes, on ne pourrait pas tout de suite voir  la contribution du genre d'ou la nécéssité du pie Chart.
+L'idéal c'est de représenter toute l'information sur un seul graphique mais pour  assurer de mettre en oeuvre: "le seeking Mantra: overview first ", on aimerait que l'utilisateur aperçoit tout de suite les informations qu'on aimerait communiquer: Le fait d'avoir investit  sur un budget garanti-t-elle une bonne classement au box-office? ou bien l'attribution d'une récompense. Le genre a-t-il un impact au classement du box-office et à l'attribution de récompense. Etre mieux classé au box-office est -il garant d'une récompense?
+Alors  la relation box-office, budget et récompense, sera évidente sur le Bar Chart, mais même si on représente le genre sur ce graphique, on ne pourrait pas tout de suite voir  la contribution du genre d'ou la nécéssité du pie Chart.
+
 ### 1. Bar Chart horizontale  
 Le bar Chart est composé de deux axes, et de barres.
 l'axe des ordonnées avec le rang dépendant de l'ordre que l'utilisateur , l'axe des abcisses représente le montant en dollars.
@@ -47,7 +49,7 @@ l'axe des ordonnées avec le rang dépendant de l'ordre que l'utilisateur , l'ax
 
 ### 2. Graphique en secteur
 On a choisit ce graphique, pour mettre en évidence le rôle du genre dans ce qu'on veut montrer pour le graphique Bar Chart.
-On pourrait toute de suite voir la proportion de chaque genre qu'on représente avec une couleur en plus du pictogramme puisqu'il est déconseillé de coder une information sur la base seulement d'une couleur.
+On pourrait toute de suite voir la proportion de chaque genre qu'on représente avec une couleur.
 ## Interaction
 ### 1. Sur le Bar Chart
 Pour toujours assurer de mettre en oeuvre le "Seeking Mantra overview first, zoom and filter , detail on demand" on a ajouté de l'intéraction à notre représentation.  
@@ -79,6 +81,10 @@ vient de la lib __vue-slider__.
 
 La gestion des filtres se font au travers des requêtes SQL composées à partir des informations de la vue. Puis, nous 
 parsons le résultat afin d'afficher ce qui est nécessaire dans chaque graphe.
+# Sources de données
+Nos données viennent de plusieurs sources différentes qu'on a assemblé, quelques preparations ont été faits, pour avoir des données cohérents et propres comme, enlever les entrées avec des valeurs du budgets, ou de revenue nulle, corriger des anomalies...
+Les données concernant les  box-office et budget viennent de Kaggle: https://www.kaggle.com/tmdb/tmdb-movie-metadata et de https://www.boxofficemojo.com/
+
 
 # Sketches
 
