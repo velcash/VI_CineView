@@ -12,7 +12,7 @@ class DataFilter:
         self.path = path
         
     def load_BOdata(self,file):
-        df = pd.read_csv(self.path +'/'+ file)
+        df = pd.read_csv(self.path +'/'+ file, sep = ';')
         return df
     #load data about Oscar
     def load_oscarData(self, file):
