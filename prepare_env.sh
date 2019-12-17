@@ -50,6 +50,7 @@ npm install vue-slider-component --save
 npm i --save @fortawesome/fontawesome-svg-core
 npm i --save @fortawesome/free-solid-svg-icons
 npm i --save @fortawesome/vue-fontawesome
+npm install --save vue-lodash
 npm audit fix
 
 deactivate_node

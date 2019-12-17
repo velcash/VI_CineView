@@ -123,6 +123,7 @@ import PieChart from './PieChart.vue';
 import VueSlider from 'vue-slider-component';
 import 'vue-slider-component/theme/default.css';
 import axios from 'axios';
+import _ from 'lodash'
 
 export default {
   components: { BarExample, VueSlider, PieChart },
@@ -368,6 +369,9 @@ export default {
       this.rank = [];
       this.boxOffices.forEach(element => this.rank.push(element.rank));
     },
+    filterByDate: _.debounce(function(type, palme, oscar, usa, others, startDate, endDate) {
+        this.getFilters(type, palme, oscar, usa, others, startDate, endDate);
+    }, 100),
     getHome: function() {
       this.orderState = 'id';
       const path = 'http://localhost:5000/';
@@ -398,7 +402,7 @@ export default {
         this.value.sort((a, b) => a - b);
         this.startDate = this.value[0];
         this.endDate = this.value[1];
-        this.getFilters(this.orderState, this.filterPalme, this.filterOscars, this.filterUsa, this.filterOthers, this.startDate, this.endDate);
+        this.filterByDate(this.orderState, this.filterPalme, this.filterOscars, this.filterUsa, this.filterOthers, this.startDate, this.endDate);
       }
   }
 };
